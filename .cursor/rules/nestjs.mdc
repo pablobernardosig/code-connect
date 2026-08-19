@@ -1,0 +1,43 @@
+---
+description: Convenções NestJS para apps/nest-app
+globs: apps/nest-app/**/*.ts
+alwaysApply: false
+---
+
+# NestJS (`apps/nest-app`)
+
+Módulos, controllers e providers com decorators. Bootstrap em `src/main.ts` (`PORT` ou 3000). Gerar código com schematics (`nest g`), não criar arquivos avulsos fora do padrão.
+
+```typescript
+@Controller('posts')
+export class PostsController {
+  constructor(private readonly postsService: PostsService) {}
+
+  @Get()
+  findAll(): Promise<Post[]> {
+    return this.postsService.findAll();
+  }
+}
+```
+
+- Um módulo por feature (`foo.module.ts`, `foo.controller.ts`, `foo.service.ts`).
+- Injete dependências pelo construtor; não instancie services com `new`.
+- `tsconfig`: `nodenext`, decorators ligados. ESLint type-checked + Prettier.
+- REST: recursos no plural, sem verbos na URL; status HTTP semânticos; query para filtro/paginação.
+
+## Estilo
+
+Prettier: `singleQuote: true`, `trailingComma: "all"`. Semicolons implícitos do Prettier.
+
+```typescript
+// ❌
+const name = "code-connect"
+
+// ✅
+const name = 'code-connect';
+```
+
+## Testes
+
+- Unit: `*.spec.ts` ao lado do arquivo (`Test.createTestingModule`).
+- E2E: `test/*.e2e-spec.ts` + Supertest; feche a app no `afterEach`.
