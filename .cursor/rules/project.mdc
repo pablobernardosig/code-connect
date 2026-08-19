@@ -1,0 +1,48 @@
+---
+description: Contexto do monorepo Code Connect — pnpm, apps, REST, Atomic Design e commits
+alwaysApply: true
+---
+
+# Code Connect
+
+Monorepo pnpm (`pnpm@11`) com duas apps em `apps/*`. Não use npm nem yarn.
+
+| App | Pasta | Stack |
+|-----|--------|--------|
+| Frontend | `apps/react-app` | React 19, Vite 8, TypeScript, Tailwind, Oxlint |
+| Backend | `apps/nest-app` | NestJS 11, Express, TypeScript, REST, Jest, ESLint + Prettier |
+
+Não há `packages/` compartilhados. Instale dependências na app correta.
+
+## Comandos (na raiz)
+
+```bash
+pnpm install
+pnpm dev:react      # Vite (padrão :5173)
+pnpm dev:nest       # Nest watch (PORT ou :3000)
+pnpm build:react
+pnpm build:nest
+```
+
+Testes/lint: `pnpm --filter ./apps/nest-app test` (também `test:e2e`, `lint`). React: `pnpm --filter ./apps/react-app lint`.
+
+## Frontend
+
+Atomic Design em `src/components/{atoms,molecules,organisms,templates,pages}`. Estilize só com Tailwind — não crie CSS por componente.
+
+Todo componente novo ou alterado precisa de teste do uso essencial (render, props críticas, interação principal), ao lado do arquivo (`Button.test.tsx`).
+
+## Backend (REST)
+
+API resource-oriented e stateless. URLs no plural, sem verbos (`/posts`, `/posts/:id/comments`). Verbos HTTP corretos: `GET` leitura, `POST` criação (`201`), `PUT`/`PATCH` atualização, `DELETE` remoção (`204`). Erros com status semânticos (`400`, `401`, `404`, `409`). Filtro, ordenação e paginação via query (`?page=1&limit=10`). JSON; respostas previsíveis. `GET`/`PUT`/`DELETE` idempotentes.
+
+## Git
+
+Conventional Commits em ambos os apps: `tipo(escopo): descrição` em inglês, imperativo, minúsculo. Tipos: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`. Escopo: `react` ou `nest`. Breaking change: `feat(nest)!: ...` ou rodapé `BREAKING CHANGE:`.
+
+```
+feat(react): add Button atom
+fix(nest): return 404 when post is missing
+```
+
+Não commite `.env`. Código só em `apps/*`. Responda em português.
