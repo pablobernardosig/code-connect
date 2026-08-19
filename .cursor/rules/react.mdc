@@ -1,0 +1,39 @@
+---
+description: Convenções React + Vite para apps/react-app
+globs: apps/react-app/**/*.{ts,tsx,css}
+alwaysApply: false
+---
+
+# React (`apps/react-app`)
+
+Componentes funcionais, React 19, Vite, Tailwind, `jsx: react-jsx`. Entry: `src/main.tsx` → `App.tsx`. Lint: Oxlint (não ESLint).
+
+Atomic Design: `src/components/{atoms,molecules,organisms,templates,pages}`. Estilize com classes Tailwind; não adicione `.css` por componente. Cada componente tem um teste do uso essencial ao lado (`Foo.test.tsx`).
+
+`tsconfig.app.json` usa `verbatimModuleSyntax` e `allowImportingTsExtensions`:
+
+```tsx
+// ❌
+import { useState, type ReactNode } from 'react'
+import App from './App'
+
+// ✅
+import { useState } from 'react'
+import type { ReactNode } from 'react'
+import App from './App.tsx'
+```
+
+- Extraia lógica reutilizável para hooks (`useFoo`).
+- Semicolons omitidos (estilo atual do Vite template). Aspas simples em JS/TS.
+- `erasableSyntaxOnly`: sem enums nem namespaces; use `as const` ou unions.
+
+```tsx
+export function Counter() {
+  const [count, setCount] = useState(0)
+  return (
+    <button type="button" onClick={() => setCount((n) => n + 1)}>
+      Count is {count}
+    </button>
+  )
+}
+```
