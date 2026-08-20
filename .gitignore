@@ -5,6 +5,8 @@ node_modules/
 # build outputs
 dist/
 coverage/
+test-results/
+playwright-report/
 
 # logs
 *.log
@@ -20,4 +22,3 @@ logs/
 Thumbs.db
 .idea/
 .vscode/
-

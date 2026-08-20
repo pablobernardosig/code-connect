@@ -4,7 +4,7 @@ import { TextLink } from '../atoms/TextLink.tsx'
 type FormOptionsProps = {
   remember: boolean
   onRememberChange: (checked: boolean) => void
-  forgotPasswordTo: string
+  forgotPasswordTo?: string
 }
 
 export function FormOptions({
@@ -13,15 +13,15 @@ export function FormOptions({
   forgotPasswordTo,
 }: FormOptionsProps) {
   return (
-    <div className="flex items-center justify-between">
-      <label className="flex items-center gap-2 text-3xl text-auth-subtle">
+    <div className={`flex items-center ${forgotPasswordTo ? 'justify-between' : ''}`}>
+      <label className="flex items-center gap-2 text-sm leading-normal text-cinza-medio">
         <Checkbox
           checked={remember}
           onChange={(event) => onRememberChange(event.target.checked)}
         />
         Lembrar-me
       </label>
-      <TextLink to={forgotPasswordTo}>Esqueci a senha</TextLink>
+      {forgotPasswordTo ? <TextLink to={forgotPasswordTo}>Esqueci a senha</TextLink> : null}
     </div>
   )
 }

@@ -24,7 +24,7 @@ export function FormField({
   const id = useId()
 
   return (
-    <div className="space-y-1">
+    <div className="flex w-full flex-col gap-2">
       <Label htmlFor={id}>{label}</Label>
       <Input
         id={id}
@@ -37,7 +37,7 @@ export function FormField({
         aria-describedby={error ? `${id}-error` : undefined}
       />
       {error ? (
-        <p id={`${id}-error`} className="text-left text-xs text-red-300">
+        <p id={`${id}-error`} className="text-left text-xs text-erro">
           {error}
         </p>
       ) : null}

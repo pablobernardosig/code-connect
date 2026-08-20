@@ -1,13 +1,18 @@
+@import '@fontsource/prompt/latin-400.css';
+@import '@fontsource/prompt/latin-600.css';
+@import '@fontsource/prompt/latin-ext-400.css';
+@import '@fontsource/prompt/latin-ext-600.css';
 @import 'tailwindcss';
 
 @theme {
-  --color-auth-bg: #121214;
-  --color-auth-card: #202024;
-  --color-auth-surface: #8d8d8d;
-  --color-auth-accent: #7ff28c;
-  --color-auth-text: #ffffff;
-  --color-auth-muted: #d9d9d9;
-  --color-auth-subtle: #9c9c9c;
+  --color-grafite: #00090e;
+  --color-cinza-escuro: #171d1f;
+  --color-cinza-medio: #888888;
+  --color-offwhite: #e1e1e1;
+  --color-verde-destaque: #81fe88;
+  --color-verde-petroleo: #132e35;
+  --color-erro: #fca5a5;
+  --font-sans: 'Prompt', 'Segoe UI', Roboto, sans-serif;
 }
 
 *,
@@ -19,7 +24,7 @@
 body {
   margin: 0;
   min-height: 100svh;
-  font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
-  background-color: var(--color-auth-bg);
-  color: var(--color-auth-text);
+  font-family: var(--font-sans);
+  background-color: var(--color-grafite);
+  color: var(--color-offwhite);
 }

@@ -6,8 +6,13 @@ type SocialButtonProps = {
 
 export function SocialButton({ label, iconSrc, iconAlt }: SocialButtonProps) {
   return (
-    <button type="button" className="flex flex-col items-center gap-2 text-2xl text-auth-muted">
-      <img src={iconSrc} alt={iconAlt} className="size-12" />
+    <button
+      type="button"
+      className="flex flex-col items-center justify-center gap-1 text-xs leading-normal text-offwhite"
+    >
+      <span className="flex size-8 items-center justify-center overflow-clip">
+        <img src={iconSrc} alt={iconAlt} className="size-full object-contain" />
+      </span>
       <span>{label}</span>
     </button>
   )

@@ -10,7 +10,12 @@ describe('AuthLayout', () => {
       </AuthLayout>,
     )
 
-    expect(screen.getByAltText('Banner principal')).toHaveAttribute('src', '/banner.png')
+    const banner = screen.getByAltText('Banner principal')
+    expect(banner).toHaveAttribute('src', '/banner.png')
+    expect(banner).toHaveAttribute('width', '384')
+    expect(banner).toHaveAttribute('height', '600')
+    expect(banner).toHaveAttribute('fetchpriority', 'high')
+    expect(banner).toHaveAttribute('decoding', 'async')
     expect(screen.getByText('Conteúdo de autenticação')).toBeInTheDocument()
   })
 })

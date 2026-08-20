@@ -5,15 +5,15 @@ import { AuthFooterCta } from '../molecules/AuthFooterCta.tsx'
 import { FormField } from '../molecules/FormField.tsx'
 import { FormOptions } from '../molecules/FormOptions.tsx'
 import { SocialProviders } from '../molecules/SocialProviders.tsx'
-import { useLoginForm } from '../../hooks/useLoginForm.ts'
-import type { LoginFormValues } from '../../hooks/useLoginForm.ts'
+import { useSignUpForm } from '../../hooks/useSignUpForm.ts'
+import type { SignUpFormValues } from '../../hooks/useSignUpForm.ts'
 
-type LoginFormProps = {
-  onSubmit?: (values: LoginFormValues) => void
+type SignUpFormProps = {
+  onSubmit?: (values: SignUpFormValues) => void
 }
 
-export function LoginForm({ onSubmit }: LoginFormProps) {
-  const { values, errors, setFieldValue, setRemember, validate } = useLoginForm()
+export function SignUpForm({ onSubmit }: SignUpFormProps) {
+  const { values, errors, setFieldValue, setRemember, validate } = useSignUpForm()
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -29,12 +29,21 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
     <form className="mt-8 flex flex-col gap-8" onSubmit={handleSubmit} noValidate>
       <div className="flex flex-col gap-4">
         <FormField
-          name="identifier"
-          label="Email ou usuário"
-          value={values.identifier}
-          placeholder="usuario123"
-          error={errors.identifier}
-          onChange={(value) => setFieldValue('identifier', value)}
+          name="name"
+          label="Nome"
+          value={values.name}
+          placeholder="Nome completo"
+          error={errors.name}
+          onChange={(value) => setFieldValue('name', value)}
+        />
+        <FormField
+          name="email"
+          type="email"
+          label="Email"
+          value={values.email}
+          placeholder="Digite seu email"
+          error={errors.email}
+          onChange={(value) => setFieldValue('email', value)}
         />
         <FormField
           name="password"
@@ -45,15 +54,11 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
           error={errors.password}
           onChange={(value) => setFieldValue('password', value)}
         />
-        <FormOptions
-          remember={values.remember}
-          onRememberChange={setRemember}
-          forgotPasswordTo="/recuperar-senha"
-        />
+        <FormOptions remember={values.remember} onRememberChange={setRemember} />
       </div>
 
       <Button type="submit" showArrow>
-        Login
+        Cadastrar
       </Button>
 
       <div className="flex flex-col gap-2">
@@ -62,11 +67,11 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
       </div>
 
       <AuthFooterCta
-        prompt="Ainda não tem conta?"
-        ctaLabel="Crie seu cadastro!"
-        ctaTo="/cadastro"
-        layout="stack"
-        icon="assignment"
+        prompt="Já tem conta?"
+        ctaLabel="Faça seu login!"
+        ctaTo="/login"
+        layout="inline"
+        icon="login"
       />
     </form>
   )

@@ -1,5 +1,5 @@
 ---
-description: Contexto do monorepo Code Connect — pnpm, apps, REST, Atomic Design e commits
+description: Contexto do monorepo Code Connect — pnpm, apps, paleta, tokens de tipo, REST, Atomic Design e commits
 alwaysApply: true
 ---
 
@@ -28,7 +28,19 @@ Testes/lint: `pnpm --filter ./apps/nest-app test` (também `test:e2e`, `lint`). 
 
 ## Frontend
 
-Atomic Design em `src/components/{atoms,molecules,organisms,templates,pages}`. Estilize só com Tailwind — não crie CSS por componente.
+Atomic Design em `src/components/{atoms,molecules,organisms,templates,pages}`. Estilize só com Tailwind — não crie CSS por componente. Paleta em `apps/react-app/src/index.css` (`@theme`). Sem hex nem `text-[Npx]` nas classes: use os tokens abaixo.
+
+| Token | Hex | Classe |
+|-------|-----|--------|
+| Grafite | `#00090E` | `bg-grafite` |
+| Cinza escuro | `#171D1F` | `bg-cinza-escuro` / `text-cinza-escuro` |
+| Cinza médio | `#888888` | `bg-cinza-medio` / `text-cinza-medio` |
+| Offwhite | `#E1E1E1` | `text-offwhite` |
+| Verde destaque | `#81FE88` | `bg-verde-destaque` / `text-verde-destaque` |
+| Verde petróleo | `#132E35` | `text-verde-petroleo` |
+| Erro | `#FCA5A5` | `text-erro` |
+
+Fonte Prompt. Tamanho do Figma → token mais próximo: 31px `text-3xl`, 22px `text-xl`, 18px `text-lg`, 15px `text-sm`, 12.5px `text-xs`. Line-height 1.5 → `leading-normal`.
 
 Todo componente novo ou alterado precisa de teste do uso essencial (render, props críticas, interação principal), ao lado do arquivo (`Button.test.tsx`).
 

@@ -24,4 +24,15 @@ describe('FormOptions', () => {
       '/recuperar',
     )
   })
+
+  it('omite o link de recuperação quando a rota não é informada', () => {
+    render(
+      <MemoryRouter>
+        <FormOptions remember={false} onRememberChange={vi.fn()} />
+      </MemoryRouter>,
+    )
+
+    expect(screen.getByLabelText('Lembrar-me')).toBeInTheDocument()
+    expect(screen.queryByRole('link', { name: 'Esqueci a senha' })).not.toBeInTheDocument()
+  })
 })
