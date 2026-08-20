@@ -12,7 +12,7 @@ describe('LoginPage', () => {
     )
 
     expect(screen.getByRole('heading', { name: 'Login' })).toBeInTheDocument()
-    expect(screen.getByAltText('Banner do Code Connect')).toHaveAttribute('src', '/banner.png')
+    expect(screen.getByAltText('Banner do Code Connect')).toHaveAttribute('src', '/banner.webp')
     expect(screen.getByLabelText('Email ou usuário')).toBeInTheDocument()
   })
 })

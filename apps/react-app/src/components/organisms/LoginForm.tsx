@@ -26,8 +26,8 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
   }
 
   return (
-    <form className="mt-8" onSubmit={handleSubmit} noValidate>
-      <div className="space-y-5">
+    <form className="mt-8 flex flex-col gap-8" onSubmit={handleSubmit} noValidate>
+      <div className="flex flex-col gap-4">
         <FormField
           name="identifier"
           label="Email ou usuário"
@@ -45,9 +45,6 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
           error={errors.password}
           onChange={(value) => setFieldValue('password', value)}
         />
-      </div>
-
-      <div className="mt-3">
         <FormOptions
           remember={values.remember}
           onRememberChange={setRemember}
@@ -55,15 +52,22 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
         />
       </div>
 
-      <div className="mt-6">
-        <Button type="submit" showArrow>
-          Login
-        </Button>
+      <Button type="submit" showArrow>
+        Login
+      </Button>
+
+      <div className="flex flex-col gap-2">
+        <Divider text="ou entre com outras contas" />
+        <SocialProviders />
       </div>
 
-      <Divider text="ou entre com outras contas" />
-      <SocialProviders />
-      <AuthFooterCta prompt="Ainda não tem conta?" ctaLabel="Crie seu cadastro!" ctaTo="/cadastro" />
+      <AuthFooterCta
+        prompt="Ainda não tem conta?"
+        ctaLabel="Crie seu cadastro!"
+        ctaTo="/cadastro"
+        layout="stack"
+        icon="assignment"
+      />
     </form>
   )
 }
