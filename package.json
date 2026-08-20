@@ -6,10 +6,10 @@
     "dev:react": "pnpm --filter ./apps/react-app dev",
     "build:react": "pnpm --filter ./apps/react-app build",
     "preview:react": "pnpm --filter ./apps/react-app preview",
+    "test:a11y": "pnpm --filter ./apps/react-app test:a11y",
 
     "dev:nest": "pnpm --filter ./apps/nest-app start:dev",
     "start:nest": "pnpm --filter ./apps/nest-app start",
     "build:nest": "pnpm --filter ./apps/nest-app build"
   }
 }
-
