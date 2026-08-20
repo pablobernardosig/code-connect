@@ -6,15 +6,15 @@ type TextLinkProps = LinkProps & {
 }
 
 const variantClasses = {
-  light: 'text-auth-text underline',
-  accent: 'text-auth-accent',
+  light: 'text-sm text-offwhite underline',
+  accent: 'text-lg text-verde-destaque',
 } as const
 
 export function TextLink({ variant = 'light', className, ...props }: TextLinkProps) {
   return (
     <Link
       {...props}
-      className={`${variantClasses[variant]} text-3xl font-medium transition-opacity hover:opacity-90 ${className ?? ''}`}
+      className={`${variantClasses[variant]} font-normal leading-normal transition-opacity hover:opacity-90 ${className ?? ''}`}
     />
   )
 }
