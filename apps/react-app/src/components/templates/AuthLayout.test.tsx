@@ -5,13 +5,13 @@ import { AuthLayout } from './AuthLayout.tsx'
 describe('AuthLayout', () => {
   it('renderiza banner e conteúdo', () => {
     render(
-      <AuthLayout bannerSrc="/banner.webp" bannerAlt="Banner principal">
+      <AuthLayout bannerSrc="/banner.png" bannerAlt="Banner principal">
         <p>Conteúdo de autenticação</p>
       </AuthLayout>,
     )
 
     const banner = screen.getByAltText('Banner principal')
-    expect(banner).toHaveAttribute('src', '/banner.webp')
+    expect(banner).toHaveAttribute('src', '/banner.png')
     expect(banner).toHaveAttribute('width', '384')
     expect(banner).toHaveAttribute('height', '600')
     expect(banner).toHaveAttribute('fetchpriority', 'high')

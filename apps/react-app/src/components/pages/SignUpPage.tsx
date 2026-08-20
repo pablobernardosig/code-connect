@@ -4,7 +4,7 @@ import { AuthLayout } from '../templates/AuthLayout.tsx'
 
 export function SignUpPage() {
   return (
-    <AuthLayout bannerSrc="/banner-cadastro.webp" bannerAlt="Banner do cadastro">
+    <AuthLayout bannerSrc="/banner.png" bannerAlt="Banner do cadastro">
       <AuthHeading title="Cadastro" subtitle="Olá! Preencha seus dados." />
       <SignUpForm />
     </AuthLayout>

@@ -13,7 +13,7 @@ describe('SignUpPage', () => {
 
     expect(screen.getByRole('heading', { name: 'Cadastro' })).toBeInTheDocument()
     expect(screen.getByText('Olá! Preencha seus dados.')).toBeInTheDocument()
-    expect(screen.getByAltText('Banner do cadastro')).toHaveAttribute('src', '/banner-cadastro.webp')
+    expect(screen.getByAltText('Banner do cadastro')).toHaveAttribute('src', '/banner.png')
     expect(screen.getByLabelText('Nome')).toBeInTheDocument()
     expect(screen.getByLabelText('Email')).toBeInTheDocument()
     expect(screen.getByLabelText('Senha')).toBeInTheDocument()
