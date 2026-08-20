@@ -6,7 +6,7 @@ describe('SocialProviders', () => {
   it('renderiza provedores sociais', () => {
     render(<SocialProviders />)
 
-    expect(screen.getByAltText('Logo do Github')).toBeInTheDocument()
-    expect(screen.getByAltText('Logo do Gmail')).toBeInTheDocument()
+    expect(screen.getByAltText('Logo do Github')).toHaveAttribute('src', '/github.svg')
+    expect(screen.getByAltText('Logo do Gmail')).toHaveAttribute('src', '/gmail.svg')
   })
 })

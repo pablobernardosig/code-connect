@@ -4,8 +4,8 @@ import { SocialButton } from './SocialButton.tsx'
 
 describe('SocialButton', () => {
   it('renderiza ícone e rótulo', () => {
-    render(<SocialButton label="Github" iconSrc="/github.png" iconAlt="Logo do Github" />)
+    render(<SocialButton label="Github" iconSrc="/github.svg" iconAlt="Logo do Github" />)
     expect(screen.getByText('Github')).toBeInTheDocument()
-    expect(screen.getByAltText('Logo do Github')).toHaveAttribute('src', '/github.png')
+    expect(screen.getByAltText('Logo do Github')).toHaveAttribute('src', '/github.svg')
   })
 })
