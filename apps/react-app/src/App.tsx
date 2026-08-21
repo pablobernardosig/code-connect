@@ -1,5 +1,7 @@
 import { lazy, Suspense } from 'react'
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router'
+import { BrowserRouter, Route, Routes } from 'react-router'
+import { AuthGate } from './auth/AuthGate.tsx'
+import { HomePage } from './components/pages/HomePage.tsx'
 import { LoginPage } from './components/pages/LoginPage.tsx'
 
 const SignUpPage = lazy(() =>
@@ -13,7 +15,14 @@ function App() {
     <BrowserRouter>
       <Suspense fallback={null}>
         <Routes>
-          <Route path="/" element={<Navigate to="/login" replace />} />
+          <Route
+            path="/"
+            element={
+              <AuthGate>
+                <HomePage />
+              </AuthGate>
+            }
+          />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/cadastro" element={<SignUpPage />} />
         </Routes>

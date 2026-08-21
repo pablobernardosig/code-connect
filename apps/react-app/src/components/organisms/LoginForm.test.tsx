@@ -14,7 +14,7 @@ describe('LoginForm', () => {
     )
 
     fireEvent.change(screen.getByLabelText('Email ou usuário'), {
-      target: { value: 'usuario123' },
+      target: { value: 'ada@example.com' },
     })
     fireEvent.change(screen.getByLabelText('Senha'), {
       target: { value: 'senha123' },
@@ -22,7 +22,7 @@ describe('LoginForm', () => {
     fireEvent.click(screen.getAllByRole('button', { name: /login/i })[0])
 
     expect(onSubmit).toHaveBeenCalledWith({
-      identifier: 'usuario123',
+      identifier: 'ada@example.com',
       password: 'senha123',
       remember: false,
     })
@@ -42,5 +42,37 @@ describe('LoginForm', () => {
     expect(onSubmit).not.toHaveBeenCalled()
     expect(screen.getByText('Informe seu email ou usuário.')).toBeInTheDocument()
     expect(screen.getByText('Informe sua senha.')).toBeInTheDocument()
+  })
+
+  it('mostra erro quando o email é inválido', () => {
+    const onSubmit = vi.fn()
+
+    render(
+      <MemoryRouter>
+        <LoginForm onSubmit={onSubmit} />
+      </MemoryRouter>,
+    )
+
+    fireEvent.change(screen.getByLabelText('Email ou usuário'), {
+      target: { value: 'usuario123' },
+    })
+    fireEvent.change(screen.getByLabelText('Senha'), {
+      target: { value: 'senha123' },
+    })
+    fireEvent.click(screen.getAllByRole('button', { name: /login/i })[0])
+
+    expect(onSubmit).not.toHaveBeenCalled()
+    expect(screen.getByText('Informe um email válido.')).toBeInTheDocument()
+  })
+
+  it('mostra erro de submissão e desabilita o botão', () => {
+    render(
+      <MemoryRouter>
+        <LoginForm isSubmitting submitError="Email ou senha inválidos." />
+      </MemoryRouter>,
+    )
+
+    expect(screen.getByRole('alert')).toHaveTextContent('Email ou senha inválidos.')
+    expect(screen.getByRole('button', { name: 'Login' })).toBeDisabled()
   })
 })
