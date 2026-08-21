@@ -11,6 +11,8 @@ type LoginFormErrors = {
   password?: string
 }
 
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
 export function useLoginForm() {
   const [values, setValues] = useState<LoginFormValues>({
     identifier: '',
@@ -32,6 +34,8 @@ export function useLoginForm() {
 
     if (!values.identifier.trim()) {
       nextErrors.identifier = 'Informe seu email ou usuário.'
+    } else if (!emailPattern.test(values.identifier.trim())) {
+      nextErrors.identifier = 'Informe um email válido.'
     }
 
     if (!values.password.trim()) {

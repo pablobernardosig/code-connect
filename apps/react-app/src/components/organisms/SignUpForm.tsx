@@ -9,20 +9,26 @@ import { useSignUpForm } from '../../hooks/useSignUpForm.ts'
 import type { SignUpFormValues } from '../../hooks/useSignUpForm.ts'
 
 type SignUpFormProps = {
-  onSubmit?: (values: SignUpFormValues) => void
+  onSubmit?: (values: SignUpFormValues) => void | Promise<void>
+  isSubmitting?: boolean
+  submitError?: string
 }
 
-export function SignUpForm({ onSubmit }: SignUpFormProps) {
+export function SignUpForm({
+  onSubmit,
+  isSubmitting = false,
+  submitError,
+}: SignUpFormProps) {
   const { values, errors, setFieldValue, setRemember, validate } = useSignUpForm()
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
     if (!validate()) {
       return
     }
 
-    onSubmit?.(values)
+    await onSubmit?.(values)
   }
 
   return (
@@ -57,7 +63,13 @@ export function SignUpForm({ onSubmit }: SignUpFormProps) {
         <FormOptions remember={values.remember} onRememberChange={setRemember} />
       </div>
 
-      <Button type="submit" showArrow>
+      {submitError ? (
+        <p role="alert" className="text-sm text-erro">
+          {submitError}
+        </p>
+      ) : null}
+
+      <Button type="submit" showArrow disabled={isSubmitting}>
         Cadastrar
       </Button>
 

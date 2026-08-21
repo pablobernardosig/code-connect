@@ -9,20 +9,26 @@ import { useLoginForm } from '../../hooks/useLoginForm.ts'
 import type { LoginFormValues } from '../../hooks/useLoginForm.ts'
 
 type LoginFormProps = {
-  onSubmit?: (values: LoginFormValues) => void
+  onSubmit?: (values: LoginFormValues) => void | Promise<void>
+  isSubmitting?: boolean
+  submitError?: string
 }
 
-export function LoginForm({ onSubmit }: LoginFormProps) {
+export function LoginForm({
+  onSubmit,
+  isSubmitting = false,
+  submitError,
+}: LoginFormProps) {
   const { values, errors, setFieldValue, setRemember, validate } = useLoginForm()
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
     if (!validate()) {
       return
     }
 
-    onSubmit?.(values)
+    await onSubmit?.(values)
   }
 
   return (
@@ -52,7 +58,13 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
         />
       </div>
 
-      <Button type="submit" showArrow>
+      {submitError ? (
+        <p role="alert" className="text-sm text-erro">
+          {submitError}
+        </p>
+      ) : null}
+
+      <Button type="submit" showArrow disabled={isSubmitting}>
         Login
       </Button>
 

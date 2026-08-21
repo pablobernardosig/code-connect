@@ -10,6 +10,9 @@
 
     "dev:nest": "pnpm --filter ./apps/nest-app start:dev",
     "start:nest": "pnpm --filter ./apps/nest-app start",
-    "build:nest": "pnpm --filter ./apps/nest-app build"
+    "build:nest": "pnpm --filter ./apps/nest-app build",
+
+    "db:up": "docker compose up -d",
+    "db:down": "docker compose down"
   }
 }

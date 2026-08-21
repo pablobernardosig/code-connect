@@ -72,4 +72,15 @@ describe('SignUpForm', () => {
     expect(onSubmit).not.toHaveBeenCalled()
     expect(screen.getByText('Informe um email válido.')).toBeInTheDocument()
   })
+
+  it('mostra erro de submissão e desabilita o botão', () => {
+    render(
+      <MemoryRouter>
+        <SignUpForm isSubmitting submitError="Este email já está em uso." />
+      </MemoryRouter>,
+    )
+
+    expect(screen.getByRole('alert')).toHaveTextContent('Este email já está em uso.')
+    expect(screen.getByRole('button', { name: /cadastrar/i })).toBeDisabled()
+  })
 })
